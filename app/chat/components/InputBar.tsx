@@ -53,7 +53,7 @@ export default function InputBar({
           </button>
         </div>
         <p className="text-center text-[10px] text-[#e8e6e1]/20 mt-2 tracking-wide">
-          Enter para enviar · Shift+Enter para nueva línea
+          Enter para enviar
         </p>
       </div>
     </div>
