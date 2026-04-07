@@ -3,13 +3,13 @@ export async function POST(req: Request) {
   try {
     const { message, history } = await req.json();
 
-    // Construimos el arreglo completo de mensajes
+    // Construccion del arreglo completo de mensajes
     const messages = [
       {
         role: "system",
         content: "Eres un asistente útil y amigable. Responde siempre en el mismo idioma que el usuario.",
       },
-      // Convertimos el historial previo al formato que espera la API
+      // Convertir el historial previo al formato que espera la API
       ...history.map((msg: { sender: string; text: string }) => ({
         role: msg.sender === "user" ? "user" : "assistant",
         content: msg.text,

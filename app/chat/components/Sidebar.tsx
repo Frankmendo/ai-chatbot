@@ -21,7 +21,7 @@ export default function Sidebar({
 }: SidebarProps) {
   return (
     <>
-      {/* Overlay oscuro en móvil cuando sidebar está abierto */}
+      {/* Overlay oscuro en móvil */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-10 md:hidden"
