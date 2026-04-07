@@ -33,7 +33,9 @@ export default function ChatPage() {
   const [activeChatId, setActiveChatId] = useState<string | null>(null);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(
+    typeof window !== "undefined" ? window.innerWidth >= 768 : true,
+  );
 
   useEffect(() => {
     const saved = loadChats();
@@ -135,6 +137,7 @@ export default function ChatPage() {
         onSelectChat={setActiveChatId}
         onNewChat={createNewChat}
         onDeleteChat={deleteChat}
+        onClose={() => setSidebarOpen(false)}
       />
       <div className="flex-1 flex flex-col min-w-0">
         {/* HEADER */}
