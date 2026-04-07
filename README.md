@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Chatbot — Next.js + Llama 3
 
-## Getting Started
+Chatbot con inteligencia artificial desplegado en producción. Construido con Next.js, TypeScript y el modelo Llama 3 8B de Meta vía HuggingFace.
 
-First, run the development server:
+**Demo en vivo:** [ai-chatbot-nine-xi-42.vercel.app](https://ai-chatbot-nine-xi-42.vercel.app)
 
+---
+
+##  Características
+
+- Chat en tiempo real con IA (Llama 3 8B)
+- La IA recuerda el contexto de la conversación
+- Historial de chats guardado localmente
+- Crear y eliminar conversaciones
+- Diseño responsive (móvil y desktop)
+- UI oscura inspirada en Claude
+
+---
+
+## Tecnologías
+
+| Área | Tecnología |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Lenguaje | TypeScript |
+| Estilos | Tailwind CSS |
+| IA | HuggingFace — Meta Llama 3 8B Instruct |
+| Despliegue | Vercel |
+
+---
+
+## Estructura del proyecto
+
+app/
+api/chat/route.ts        # API Route — conecta con HuggingFace
+chat/
+page.tsx               # Página principal del chat
+types.ts               # Tipos compartidos de TypeScript
+components/
+Sidebar.tsx          # Panel de historial de chats
+MessageList.tsx      # Lista de mensajes
+InputBar.tsx         # Input y botón de enviar
+layout.tsx               # Layout global
+page.tsx                 # Redirige a /chat
+
+---
+
+## Correr el proyecto localmente
+
+### 1. Clonar el repositorio
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Frankmendo/ai-chatbot.git
+cd ai-chatbot
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Instalar dependencias
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Configurar variables de entorno
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Crea un archivo `.env.local` en la raíz del proyecto:
 
-## Learn More
+HF_TOKEN=tu_token_de_huggingface
 
-To learn more about Next.js, take a look at the following resources:
+Puedes obtener tu token gratis en [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Iniciar el servidor de desarrollo
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Autor
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Franklin Mendoza**
+- GitHub: [@Frankmendo](https://github.com/Frankmendo)
+- Email: fw.mendoza@hotmail.com
