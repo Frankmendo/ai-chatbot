@@ -1,52 +1,55 @@
+import { GoogleGenAI } from "@google/genai";
 
 export async function POST(req: Request) {
   try {
     const { message, history } = await req.json();
 
-    // Construccion del arreglo completo de mensajes
-    const messages = [
-      {
-        role: "system",
-        content: "Eres un asistente útil y amigable. Responde siempre en el mismo idioma que el usuario.",
-      },
-      // Convertir el historial previo al formato que espera la API
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    if (!apiKey) {
+      console.error("GEMINI_API_KEY no está configurada");
+      return Response.json({
+        reply: "Error: la API de Gemini no está configurada.",
+      });
+    }
+
+    const ai = new GoogleGenAI({
+      apiKey,
+    });
+
+    // Construcción del historial para Gemini
+    const contents = [
       ...history.map((msg: { sender: string; text: string }) => ({
-        role: msg.sender === "user" ? "user" : "assistant",
-        content: msg.text,
+        role: msg.sender === "user" ? "user" : "model",
+        parts: [{ text: msg.text }],
       })),
-      // El mensaje actual del usuario
-      { role: "user", content: message },
+      {
+        role: "user",
+        parts: [{ text: message }],
+      },
     ];
 
-    const res = await fetch(
-      "https://router.huggingface.co/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.HF_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "meta-llama/Meta-Llama-3-8B-Instruct",
-          messages,
-          temperature: 0.7,
-          max_tokens: 500,
-        }),
-      }
-    );
+    const response = await ai.models.generateContent({
+      model: "gemini-3.6-flash",
+      contents,
+      config: {
+        systemInstruction:
+          "Eres un asistente útil y amigable. Responde siempre en el mismo idioma que el usuario.",
+        temperature: 0.7,
+        maxOutputTokens: 500,
+      },
+    });
 
-    const data = await res.json();
-    console.log("HF RESPONSE:", data);
+    console.log("GEMINI RESPONSE:", response.text);
 
-    const reply =
-      data?.choices?.[0]?.message?.content ||
-      data?.error?.message ||
-      "Sin respuesta";
+    const reply = response.text || "Sin respuesta";
 
     return Response.json({ reply });
-
   } catch (err) {
-    console.error(err);
-    return Response.json({ reply: "Error al conectar 😢" });
+    console.error("Gemini error:", err);
+
+    return Response.json({
+      reply: "Error al conectar 😢",
+    });
   }
 }

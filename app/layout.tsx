@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Frank AI Assistant",
   description:
-    "Chatbot con inteligencia artificial desplegado en producción. Construido con Next.js, TypeScript y el modelo Llama 3 8B de Meta vía HuggingFace.",
+    "Chatbot con inteligencia artificial desplegado en producción. Construido con Next.js, TypeScript y Google Gemini mediante la API de Gemini.",
 };
 
 export default function RootLayout({

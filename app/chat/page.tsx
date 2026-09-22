@@ -157,7 +157,7 @@ export default function ChatPage() {
             <p className="text-sm font-medium leading-none text-[#e8e6e1]">
               Asistente IA
             </p>
-            <p className="text-[11px] text-[#e8e6e1]/40 mt-0.5">Llama 3 · 8B</p>
+            <p className="text-[11px] text-[#e8e6e1]/40 mt-0.5">Gemini </p>
           </div>
           <div className="ml-auto w-1.5 h-1.5 rounded-full bg-[#5fa87b]" />
         </div>
